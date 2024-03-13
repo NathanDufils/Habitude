@@ -51,6 +51,9 @@
 		3343EB732B98642100B8D606 /* Habitude */ = {
 			isa = PBXGroup;
 			children = (
+				BE0B04FA2BA18710009F8555 /* ViewModels */,
+				BE0B04F92BA18709009F8555 /* Views */,
+				BE0B04F82BA18700009F8555 /* Models */,
 				3343EB742B98642100B8D606 /* HabitudeApp.swift */,
 				3343EB762B98642100B8D606 /* ContentView.swift */,
 				3343EB782B98642200B8D606 /* Assets.xcassets */,
@@ -65,6 +68,27 @@
 				3343EB7B2B98642200B8D606 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		BE0B04F82BA18700009F8555 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		BE0B04F92BA18709009F8555 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		BE0B04FA2BA18710009F8555 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModels;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
