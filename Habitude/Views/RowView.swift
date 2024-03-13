@@ -26,7 +26,8 @@ struct RowView: View {
     }
 }
 
-#Preview {
-    RowView()
-        .previewLayout(.sizeThatFits)
+struct ContentView_Previews: PreviewProvider{
+    static var previews: some View{
+        RowView()
+    }
 }
