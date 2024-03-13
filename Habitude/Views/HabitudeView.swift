@@ -17,19 +17,17 @@ struct HabitudeView: View {
             VStack {
                 Picker("State", selection: $state){
                     Text("All")
-                    Text("Done")
-                    Text("To Do")
+                    ForEach(Etat.allCases, id: \.self) {
+                        state in
+                        Text(state.rawValue)
+                    }
                 }
                 .pickerStyle(SegmentedPickerStyle())
                 .padding()
                 
                 List {
                     ForEach(data.habitudes) { habitude in
-                        if ($state.wrappedValue == "To Do" && habitude.state == false){
-                            RowView(habitude: habitude)
-                        } else if ($state.wrappedValue == "Done" && habitude.state == true){
-                            RowView(habitude: habitude)
-                        } else if ($state.wrappedValue == "All") {
+                        if (habitude.state.rawValue == $state.wrappedValue || $state.wrappedValue == "All"){
                             RowView(habitude: habitude)
                         }
                     }
