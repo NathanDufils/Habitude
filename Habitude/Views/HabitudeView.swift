@@ -33,16 +33,14 @@ struct HabitudeView: View {
                             RowView(habitude: habitude)
                         }
                     }
+                    .onDelete(perform: data.deleteItem)
+                    .onMove(perform: data.moveItem)
                 }
-                
-                .navigationTitle("Habitudes")
+                .navigationTitle("Todo")
                 .listStyle(PlainListStyle())
                 .toolbar {
                     ToolbarItem(placement: .navigationBarLeading) {
                         EditButton()
-                    }
-                    ToolbarItem(placement: .navigationBarTrailing) {
-                        NavigationLink("Add", destination: EmptyView())
                     }
                 }
             }
@@ -52,6 +50,7 @@ struct HabitudeView: View {
 
 struct HabitudeView_Previews: PreviewProvider {
     static var previews: some View {
-        HabitudeView(data: Habitude.testData)
+        HabitudeView()
+            .environmentObject(HabitudeViewModel())
     }
 }

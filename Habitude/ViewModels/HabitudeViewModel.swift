@@ -6,3 +6,37 @@
 //
 
 import Foundation
+
+class HabitudeViewModel: ObservableObject {
+    
+    @Published var habitudes: [Habitude] = []
+    
+    init() {
+        getHabitudes()
+    }
+    func getHabitudes() {
+        habitudes.append(contentsOf: Habitude.testData)
+    }
+    
+    func deleteItem(indexSet: IndexSet) {
+        habitudes.remove(atOffsets: indexSet)
+    }
+    
+    func moveItem(from: IndexSet, to: Int) {
+        habitudes.move(fromOffsets: from, toOffset: to)
+    }
+    
+    func addItem(title: String,quantity: Double, priority: Type) {
+        let newHabitude = Habitude(title: title, quantity: quantity, type: priority, state: false)
+        habitudes.append(newHabitude)
+    }
+    
+    func updateItem(habitude: Habitude) {
+        for (index, hb) in habitudes.enumerated() {
+            if hb.id == habitude.id {
+                habitudes[index].state.toggle()
+            }
+        }
+    }
+    
+}
