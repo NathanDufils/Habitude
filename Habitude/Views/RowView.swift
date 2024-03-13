@@ -8,16 +8,19 @@
 import SwiftUI
 
 struct RowView: View {
+    
+    let habitude : Habitude
+    
     var body: some View {
         HStack {
             Image(systemName: "checkmark.circle")
                 .foregroundColor(.green)
 
-            Text("Manger 5 fruits et legumes")
+            Text(habitude.title)
             
             Spacer()
             
-            Text("Quantité")
+            Text(String(habitude.quantity)+" "+habitude.type.rawValue)
                 .foregroundColor(Color(.systemGray2))
                 .font(.title3)
         }
@@ -28,6 +31,6 @@ struct RowView: View {
 
 struct ContentView_Previews: PreviewProvider{
     static var previews: some View{
-        RowView()
+        RowView(habitude: Habitude.testData[0])
     }
 }
