@@ -13,8 +13,8 @@ struct RowView: View {
     
     var body: some View {
         HStack {
-            Image(systemName: "checkmark.circle")
-                .foregroundColor(.green)
+            Image(systemName: habitude.state ? "checkmark.circle" : "circle")
+                .foregroundColor(habitude.state ? .green : .red)
 
             Text(habitude.title)
             

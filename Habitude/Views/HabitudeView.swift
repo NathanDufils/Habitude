@@ -10,7 +10,7 @@ import SwiftUI
 struct HabitudeView: View {
     
     @State var type: String = "All"
-    var data: [Habitude]
+    @EnvironmentObject var data: HabitudeViewModel
     
     var body: some View {
         NavigationView {
@@ -26,20 +26,20 @@ struct HabitudeView: View {
                 .padding()
                 
                 List {
-                    ForEach(data) { habitude in
-                        if (habitude.type.rawValue == $type.wrappedValue || $type.wrappedValue == "All"){
-                        }
+                    ForEach(data.habitudes) { habitude in
+                        RowView(habitude: habitude)
+                            .onTapGesture {
+                                data.updateItem(habitude: habitude)
+                            }
                     }
+                    .onDelete(perform: data.deleteItem)
+                    .onMove(perform: data.moveItem)
                 }
-                
-                .navigationTitle("Habitudes")
+                .navigationTitle("Todo")
                 .listStyle(PlainListStyle())
                 .toolbar {
                     ToolbarItem(placement: .navigationBarLeading) {
                         EditButton()
-                    }
-                    ToolbarItem(placement: .navigationBarTrailing) {
-                        NavigationLink("Add", destination: EmptyView())
                     }
                 }
             }
@@ -49,6 +49,7 @@ struct HabitudeView: View {
 
 struct HabitudeView_Previews: PreviewProvider {
     static var previews: some View {
-        HabitudeView(data: Habitude.testData)
+        HabitudeView()
+            .environmentObject(HabitudeViewModel())
     }
 }
