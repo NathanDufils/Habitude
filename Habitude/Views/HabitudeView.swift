@@ -34,7 +34,7 @@ struct HabitudeView: View {
                         }
                     }
                 }
-                .navigationTitle("Todo")
+                .navigationTitle("Habitudes")
                 .listStyle(PlainListStyle())
                 .toolbar {
                     ToolbarItem(placement: .navigationBarLeading) {
