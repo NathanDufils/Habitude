@@ -9,25 +9,28 @@ import SwiftUI
 
 struct HabitudeView: View {
     
-    @State var type: String = "All"
+    @State var state: String = "All"
     var data: [Habitude]
     
     var body: some View {
         NavigationView {
             VStack {
-                Picker("Type", selection: $type){
+                Picker("State", selection: $state){
                     Text("All")
-                    ForEach(Type.allCases, id: \.self) {
-                        type in
-                        Text(type.rawValue)
-                    }
+                    Text("Done")
+                    Text("To Do")
                 }
                 .pickerStyle(SegmentedPickerStyle())
                 .padding()
                 
                 List {
                     ForEach(data) { habitude in
-                        if (habitude.type.rawValue == $type.wrappedValue || $type.wrappedValue == "All"){
+                        if ($state.wrappedValue == "To Do" && habitude.state == false){
+                            RowView(habitude: habitude)
+                        } else if ($state.wrappedValue == "Done" && habitude.state == true){
+                            RowView(habitude: habitude)
+                        } else if ($state.wrappedValue == "All") {
+                            RowView(habitude: habitude)
                         }
                     }
                 }
