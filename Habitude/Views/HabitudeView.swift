@@ -10,7 +10,7 @@ import SwiftUI
 struct HabitudeView: View {
     
     @State var state: String = "All"
-    var data: [Habitude]
+    @EnvironmentObject var data : HabitudeViewModel
     
     var body: some View {
         NavigationView {
@@ -24,7 +24,7 @@ struct HabitudeView: View {
                 .padding()
                 
                 List {
-                    ForEach(data) { habitude in
+                    ForEach(data.habitudes) { habitude in
                         if ($state.wrappedValue == "To Do" && habitude.state == false){
                             RowView(habitude: habitude)
                         } else if ($state.wrappedValue == "Done" && habitude.state == true){
@@ -33,8 +33,6 @@ struct HabitudeView: View {
                             RowView(habitude: habitude)
                         }
                     }
-                    .onDelete(perform: data.deleteItem)
-                    .onMove(perform: data.moveItem)
                 }
                 .navigationTitle("Todo")
                 .listStyle(PlainListStyle())
