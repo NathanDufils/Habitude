@@ -9,7 +9,22 @@ import SwiftUI
 
 struct ParamView: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        NavigationView{
+            List{
+                Section(header:Text("Affichage")){
+                    Text("Thème")
+                    Text("Mon compte")
+                }
+                Section(header:Text("Modes")){
+                    Text("Modes d'édition")
+                }
+                Section(header:Text("Plus")){
+                    Text("Informations")
+                }
+            }
+            .navigationTitle("Paramètres")
+        }
+        
     }
 }
 
