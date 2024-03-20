@@ -44,6 +44,9 @@ struct HabitudeView: View {
                 ToolbarItem(placement: .navigationBarLeading) {
                     EditButton()
                 }
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    NavigationLink("Ajouter", destination : AddHabitudeView())
+                }
             }
         }
     }
