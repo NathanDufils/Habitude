@@ -21,6 +21,13 @@ struct AddHabitudeView: View {
                 .background(Color(.systemGray5))
                 .cornerRadius(10)
             
+            List(Type.allCases, id: \.self) { type in
+                Text(type == .n ? "Aucune" : type.rawValue)
+            }
+            .padding(.horizontal)
+            .background(Color(.systemGray6))
+            .cornerRadius(10)
+            
             Button {
                 
             } label: {
