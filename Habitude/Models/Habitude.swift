@@ -4,7 +4,7 @@ enum Type: String, CaseIterable {
     case g = "g"
     case ml = "ml"
     case km = "km"
-    case n = "none"
+    case n = ""
 }
 
 enum Etat: String, CaseIterable {

@@ -11,7 +11,8 @@ import SwiftUI
 struct HabitudeApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            HabitudeView()
+                .environmentObject(HabitudeViewModel())
         }
     }
 }

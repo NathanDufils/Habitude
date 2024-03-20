@@ -29,8 +29,13 @@ struct HabitudeView: View {
                     ForEach(data.habitudes) { habitude in
                         if (habitude.state.rawValue == $state.wrappedValue || $state.wrappedValue == "All"){
                             RowView(habitude: habitude)
+                                .onTapGesture {
+                                    data.updateItem(habitude: habitude)
+                                }
                         }
                     }
+                    .onDelete(perform: data.deleteItem)
+                    .onMove(perform: data.moveItem)
                 }
                 .navigationTitle("Habitudes")
                 .listStyle(PlainListStyle())

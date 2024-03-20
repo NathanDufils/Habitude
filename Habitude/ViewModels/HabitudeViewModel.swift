@@ -27,14 +27,23 @@ class HabitudeViewModel: ObservableObject {
     }
     
     func addItem(title: String,quantity: Double, priority: Type) {
-        let newHabitude = Habitude(title: title, quantity: quantity, type: priority, state: false)
+        let newHabitude = Habitude(title: title, quantity: quantity, type: priority, state: .todo)
         habitudes.append(newHabitude)
+    }
+    
+    func Toggle(index: Int) {
+        if habitudes[index].state.rawValue == "Done" {
+            habitudes[index].state = .todo
+        }
+        else{
+            habitudes[index].state = .done
+        }
     }
     
     func updateItem(habitude: Habitude) {
         for (index, hb) in habitudes.enumerated() {
             if hb.id == habitude.id {
-                habitudes[index].state.toggle()
+                Toggle(index: index)
             }
         }
     }
