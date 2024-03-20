@@ -8,8 +8,6 @@
 import SwiftUI
 
 struct HabitudeView: View {
-    
-    @State var state: String = "All"
     @EnvironmentObject var data : HabitudeViewModel
     
     var body: some View {
