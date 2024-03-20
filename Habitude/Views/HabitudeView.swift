@@ -14,20 +14,10 @@ struct HabitudeView: View {
     
     var body: some View {
         NavigationView {
-            VStack {
-                Picker("State", selection: $state){
-                    Text("All")
-                    ForEach(Etat.allCases, id: \.self) {
-                        state in
-                        Text(state.rawValue)
-                    }
-                }
-                .pickerStyle(SegmentedPickerStyle())
-                .padding()
-                
-                List {
+            List {
+                Section(header:Text("To do")) {
                     ForEach(data.habitudes) { habitude in
-                        if (habitude.state.rawValue == $state.wrappedValue || $state.wrappedValue == "All"){
+                        if (habitude.state == .todo){
                             RowView(habitude: habitude)
                                 .onTapGesture {
                                     data.updateItem(habitude: habitude)
@@ -37,12 +27,24 @@ struct HabitudeView: View {
                     .onDelete(perform: data.deleteItem)
                     .onMove(perform: data.moveItem)
                 }
-                .navigationTitle("Habitudes")
-                .listStyle(PlainListStyle())
-                .toolbar {
-                    ToolbarItem(placement: .navigationBarLeading) {
-                        EditButton()
+                Section(header:Text("Done")) {
+                    ForEach(data.habitudes) { habitude in
+                        if (habitude.state == .done){
+                            RowView(habitude: habitude)
+                                .onTapGesture {
+                                    data.updateItem(habitude: habitude)
+                                }
+                        }
                     }
+                    .onDelete(perform: data.deleteItem)
+                    .onMove(perform: data.moveItem)
+                }
+            }
+            .navigationTitle("Habitudes")
+            .listStyle(GroupedListStyle())
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    EditButton()
                 }
             }
         }
