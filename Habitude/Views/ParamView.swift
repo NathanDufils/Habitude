@@ -17,8 +17,11 @@ struct ParamView: View {
                 }
                 Section(header:Text("Modes")){
                     Text("Modes d'édition")
+                    NavigationLink(destination: NotificationSettingsView()) {
+                        Text("Notifications")
+                    }
                 }
-                Section(header:Text("Plus")){
+                Section(header:Text("En Savoir Plus")){
                     Text("Informations")
                 }
             }
