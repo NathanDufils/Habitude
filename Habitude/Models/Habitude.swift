@@ -1,10 +1,22 @@
 import Foundation
 
 enum Type: String, CaseIterable {
-    case g = "g"
-    case ml = "ml"
-    case km = "km"
     case n = ""
+    case gram = "g"
+    case kilogram = "kg"
+    case milligram = "mg"
+    case liter = "L"
+    case milliliter = "mL"
+    case kilometer = "km"
+    case meter = "m"
+    case centimeter = "cm"
+    case inch = "in"
+    case foot = "ft"
+    case yard = "yd"
+    case mile = "mi"
+    case euro = "€"
+    case dollar = "$"
+    case pound = "lb"
 }
 
 enum Etat: String, CaseIterable {
@@ -21,7 +33,7 @@ struct Habitude: Identifiable {
     var state: Etat
     
     static var testData = [
-        Habitude(title: "Boire de l'eau", quantity: 1000, type: .ml, state: .todo),
+        Habitude(title: "Boire de l'eau", quantity: 1000, type: .milliliter, state: .todo),
         Habitude(title: "Faire des pompes", quantity: 10,type: .n, state: .done),
         Habitude(title: "Matchs Tinder", quantity: 5, type: .n, state: .done),
     ]
