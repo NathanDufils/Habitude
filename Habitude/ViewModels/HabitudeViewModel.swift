@@ -26,8 +26,8 @@ class HabitudeViewModel: ObservableObject {
         habitudes.move(fromOffsets: from, toOffset: to)
     }
     
-    func addItem(title: String,quantity: Double, priority: Type) {
-        let newHabitude = Habitude(title: title, quantity: quantity, type: priority, state: .todo)
+    func addItem(title: String,quantity: Double, unit: Type) {
+        let newHabitude = Habitude(title: title, quantity: quantity, type: unit, state: .todo)
         habitudes.append(newHabitude)
     }
     
