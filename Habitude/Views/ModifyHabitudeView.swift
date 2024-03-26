@@ -1,14 +1,15 @@
 //
-//  AddHabitudeView.swift
+//  ModifyHabitudeView.swift
 //  Habitude
 //
-//  Created by bertomeu tom on 20/03/2024.
+//  Created by Dufils Nathan on 26/03/2024.
 //
 
 import SwiftUI
 
-struct AddHabitudeView: View {
+struct ModifyHabitudeView: View {
     
+    var habitude: Habitude
     @State private var habitudeTitle: String = ""
     @State private var selectedQuantity: Int = 1
     @State private var selectedType: Type = .n
@@ -17,7 +18,7 @@ struct AddHabitudeView: View {
     
     var body: some View {
         VStack(spacing: 16) {
-            TextField("Enter votre habitude", text: $habitudeTitle)
+            TextField(habitude.title, text: $habitudeTitle)
                 .padding(.horizontal)
                 .frame(height: 55)
                 .background(Color(.systemGray5))
@@ -73,14 +74,14 @@ struct AddHabitudeView: View {
             
         }
         .padding(14)
-        .navigationTitle("Ajouter une habitude")
+        .navigationTitle("Modifier votre habitude")
     }
 }
 
-struct AddHabitudeView_Previews: PreviewProvider {
+struct ModifyHabitudeView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            AddHabitudeView()
+            ModifyHabitudeView(habitude: Habitude.testData[0])
         }
     }
 }
