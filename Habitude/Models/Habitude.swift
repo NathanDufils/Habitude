@@ -20,7 +20,6 @@ enum Type: String, CaseIterable {
 }
 
 enum Etat: String, CaseIterable {
-    case all = "All"
     case done = "Done"
     case todo = "To Do"
 }
@@ -31,6 +30,7 @@ struct Habitude: Identifiable {
     var quantity: Double
     var type: Type
     var state: Etat
+    var date = Date.now
     
     static var testData = [
         Habitude(title: "Boire de l'eau", quantity: 1000, type: .milliliter, state: .todo),

@@ -8,8 +8,25 @@
 import SwiftUI
 
 struct DataView: View {
+    @State var selectedDate: Date = Date()
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack() {
+            Text(selectedDate.formatted(date: .abbreviated, time: .omitted))
+                .font(.system(size: 28))
+                .bold()
+                .foregroundColor(Color.accentColor)
+                .padding()
+                .animation(.spring(), value: selectedDate)
+                .frame(width: 500)
+            Divider().frame(height: 1)
+            DatePicker("Select Date", selection: $selectedDate, displayedComponents: [.date])
+                .padding(.horizontal)
+                .datePickerStyle(.graphical)
+            Divider()
+            
+        }
+        .padding(.vertical, 100)
     }
 }
 
