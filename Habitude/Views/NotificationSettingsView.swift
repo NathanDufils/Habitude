@@ -12,9 +12,18 @@ struct NotificationSettingsView: View {
                     .datePickerStyle(WheelDatePickerStyle())
                     .padding()
                 
-                Button("Planifier une notification") {
+                Button(action : {
                     requestNotificationAuthorization()
                     scheduleNotification()
+                }) {
+                    Text("Planifier une notification")
+                        .foregroundColor(.white)
+                        .font(.headline)
+                        .frame(height: 55)
+                        .frame(maxWidth: .infinity)
+                        .background(Color.blue)
+                        .cornerRadius(10)
+                        .padding(50)
                 }
             }
             .navigationTitle("Notifications")
@@ -35,20 +44,16 @@ struct NotificationSettingsView: View {
         let center = UNUserNotificationCenter.current()
         
         let content = UNMutableNotificationContent()
-        content.title = "Titre de la notification"
-        content.body = "Corps de la notification"
+        content.title = "Les habitudes c'est habituel"
+        content.body = "Pense a faire tes habitudes !"
         content.sound = .default
         
-        // Extraire les composants de l'heure sélectionnée
         let components = Calendar.current.dateComponents([.hour, .minute], from: selectedDate)
         
-        // Créer un déclencheur de notification quotidien à l'heure sélectionnée
         let trigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: true)
         
-        // Créer une demande de notification avec l'identifiant et le contenu spécifiés
         let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
         
-        // Ajouter la demande de notification au centre de notification
         center.add(request) { error in
             if let error = error {
                 print("Erreur lors de la planification de la notification: \(error.localizedDescription)")
