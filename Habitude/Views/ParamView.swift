@@ -22,7 +22,9 @@ struct ParamView: View {
                     }
                 }
                 Section(header:Text("En Savoir Plus")){
-                    Text("Informations")
+                    NavigationLink(destination: InformationsView()) {
+                        Text("Informations")
+                    }
                 }
             }
             .navigationTitle("Paramètres")
