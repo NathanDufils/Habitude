@@ -20,7 +20,7 @@ struct CalendarView: View {
                 .padding()
                 .animation(.spring(), value: selectedDate)
                 .frame(width: 500)
-            Divider().frame(height: 1)
+            
             DatePicker("Select Date", selection: $selectedDate, displayedComponents: [.date])
                 .frame(height: 290)
                     .padding(.horizontal)
