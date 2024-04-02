@@ -13,25 +13,29 @@ struct HabitudeView: View {
     var body: some View {
         NavigationView {
             List {
-                Section(header:Text("To do")) {
+                Section(header:Text("À faire")) {
                     ForEach(data.habitudes) { habitude in
                         if (habitude.state == .todo){
-                            RowView(habitude: habitude)
-                                .onTapGesture {
-                                    data.updateItem(habitude: habitude)
-                                }
+                            NavigationLink (destination: ModifyHabitudeView(habitude: habitude)){
+                                RowView(habitude: habitude)
+                                    .onTapGesture {
+                                        data.updateItem(habitude: habitude)
+                                    }
+                            }
                         }
                     }
                     .onDelete(perform: data.deleteItem)
                     .onMove(perform: data.moveItem)
                 }
-                Section(header:Text("Done")) {
+                Section(header:Text("Fait")) {
                     ForEach(data.habitudes) { habitude in
                         if (habitude.state == .done){
-                            RowView(habitude: habitude)
-                                .onTapGesture {
-                                    data.updateItem(habitude: habitude)
-                                }
+                            NavigationLink (destination: ModifyHabitudeView(habitude: habitude)){
+                                RowView(habitude: habitude)
+                                    .onTapGesture {
+                                        data.updateItem(habitude: habitude)
+                                    }
+                            }
                         }
                     }
                     .onDelete(perform: data.deleteItem)

@@ -6,3 +6,9 @@
 //
 
 import Foundation
+
+struct DateCount: Identifiable {
+    var id = UUID()
+    let date: Date
+    let count: Int
+}

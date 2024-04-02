@@ -26,8 +26,8 @@ class HabitudeViewModel: ObservableObject {
         habitudes.move(fromOffsets: from, toOffset: to)
     }
     
-    func addItem(title: String,quantity: Double, unit: Type) {
-        let newHabitude = Habitude(title: title, quantity: quantity, type: unit, state: .todo)
+    func addItem(title: String,quantity: Int, unit: Type) {
+        let newHabitude = Habitude(title: title, quantity: quantity, type: unit, state: .todo, date: Date.now)
         habitudes.append(newHabitude)
     }
     
@@ -41,10 +41,27 @@ class HabitudeViewModel: ObservableObject {
     }
     
     func updateItem(habitude: Habitude) {
+        let index = findItem(id: habitude.id)
+        if index != -1 {
+            Toggle(index: index)
+        }
+    }
+    
+    func findItem(id:UUID) -> Int{
         for (index, hb) in habitudes.enumerated() {
-            if hb.id == habitude.id {
-                Toggle(index: index)
+            if hb.id == id {
+                return index
             }
+        }
+        return -1
+    }
+    
+    func modifyItem(id: UUID,title: String,quantity: Int, unit: Type) {
+        let index = findItem(id: id)
+        if index != -1 {
+            habitudes[index].title = title
+            habitudes[index].quantity = quantity
+            habitudes[index].type = unit
         }
     }
     

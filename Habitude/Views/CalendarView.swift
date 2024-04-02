@@ -8,11 +8,12 @@
 import SwiftUI
 
 struct CalendarView: View {
+    @EnvironmentObject var data: HabitudeViewModel
     @State var selectedDate: Date = Date()
     
     var body: some View {
         VStack() {
-            Text(selectedDate.formatted(date: .abbreviated, time: .omitted))
+            Text(formatDate(selectedDate))
                 .font(.system(size: 28))
                 .bold()
                 .foregroundColor(Color.accentColor)
@@ -21,17 +22,41 @@ struct CalendarView: View {
                 .frame(width: 500)
             Divider().frame(height: 1)
             DatePicker("Select Date", selection: $selectedDate, displayedComponents: [.date])
-                .padding(.horizontal)
-                .datePickerStyle(.graphical)
+                .frame(height: 290)
+                    .padding(.horizontal)
+                    .datePickerStyle(.graphical)
             Divider()
+            List{
+                Section(header:Text("Fait")) {
+                    ForEach(data.habitudes) { habitude in
+                        if (formatDate(habitude.date) == formatDate(selectedDate) && habitude.state == .done){
+                            RowView(habitude: habitude)
+                        }
+                    }
+
+                }
+                Section(header:Text("Pas fait")) {
+                    ForEach(data.habitudes) { habitude in
+                        if (formatDate(habitude.date) == formatDate(selectedDate) && habitude.state == .todo){
+                            RowView(habitude: habitude)
+                        }
+                    }
+
+                }
+            }
             
         }
-        .padding(.vertical, 100)
+    }
+    
+    func formatDate(_ date: Date) -> String {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .long // Format de date personnalisé
+        return formatter.string(from: date)
     }
 }
 
 struct CalendarView_Previews: PreviewProvider {
     static var previews: some View {
-        CalendarView()
+        CalendarView().environmentObject(HabitudeViewModel())
     }
 }

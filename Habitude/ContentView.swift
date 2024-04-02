@@ -18,12 +18,13 @@ struct ContentView: View {
                 }
                 .tag(0)
             
-            DataView()
+            DataView().environmentObject(HabitudeViewModel())
                 .tabItem{
                     Image(systemName: "chart.line.uptrend.xyaxis")
                     Text("Données")
                 }
                 .tag(1)
+            
             ParamView()
                 .tabItem{
                     Image(systemName: "gearshape.2.fill")

@@ -17,15 +17,29 @@ struct AddHabitudeView: View {
     
     var body: some View {
         VStack(spacing: 16) {
-            TextField("Enter votre habitude", text: $habitudeTitle)
-                .padding(.horizontal)
-                .frame(height: 55)
-                .background(Color(.systemGray5))
-                .cornerRadius(10)
-            
+            titleTextField
+            objectivePicker
+            unitPicker
+            Spacer()
+            addButton
+        }
+        .padding(14)
+        .navigationTitle("Ajouter une habitude")
+    }
+    
+    private var titleTextField: some View {
+        TextField("Enter votre habitude", text: $habitudeTitle)
+            .padding(.horizontal)
+            .frame(height: 55)
+            .background(Color(.systemGray5))
+            .cornerRadius(10)
+    }
+    
+    private var objectivePicker: some View {
+        VStack {
             Text("Objectif")
-                    .font(.headline)
-                    .foregroundColor(.secondary)
+                .font(.headline)
+                .foregroundColor(.secondary)
             Picker(selection: $selectedQuantity, label: Text("Sélectionner une quantité")) {
                 ForEach(1...10, id: \.self) {
                     Text("\($0)").tag($0)
@@ -36,16 +50,19 @@ struct AddHabitudeView: View {
                 ForEach(1...19, id: \.self) {
                     Text("\(50+$0*50)").tag(50+$0*50)
                 }
-                // TODO: Rendre la proposition plus clean
             }
             .pickerStyle(WheelPickerStyle())
             .padding(.horizontal)
             .background(Color(.systemGray6))
             .cornerRadius(10)
-            
+        }
+    }
+    
+    private var unitPicker: some View {
+        VStack {
             Text("Unité")
-                    .font(.headline)
-                    .foregroundColor(.secondary)
+                .font(.headline)
+                .foregroundColor(.secondary)
             Picker(selection: $selectedType, label: Text("Sélectionner une unité")) {
                 ForEach(Type.allCases, id: \.self) { type in
                     Text(type == .n ? "Aucune" : type.rawValue).tag(type)
@@ -55,26 +72,23 @@ struct AddHabitudeView: View {
             .background(Color(.systemGray6))
             .cornerRadius(10)
             .pickerStyle(.menu)
-            
-            Spacer()
-            
-            Button(action: {
-                data.addItem(title: habitudeTitle, quantity: Double(selectedQuantity), unit: selectedType)
-                presentationMode.wrappedValue.dismiss()
-            }) {
-                Text("Ajouter")
-                    .foregroundColor(.white)
-                    .font(.headline)
-                    .frame(height: 55)
-                    .frame(maxWidth: .infinity)
-                    .background(Color.blue)
-                    .cornerRadius(10)
-                    .padding(50)
-            }
-            
         }
-        .padding(14)
-        .navigationTitle("Ajouter une habitude")
+    }
+    
+    private var addButton: some View {
+        Button(action: {
+            data.addItem(title: habitudeTitle, quantity: selectedQuantity, unit: selectedType)
+            presentationMode.wrappedValue.dismiss()
+        }) {
+            Text("Ajouter")
+                .foregroundColor(.white)
+                .font(.headline)
+                .frame(height: 55)
+                .frame(maxWidth: .infinity)
+                .background(Color.blue)
+                .cornerRadius(10)
+                .padding(50)
+        }
     }
 }
 
@@ -85,5 +99,3 @@ struct AddHabitudeView_Previews: PreviewProvider {
         }
     }
 }
-
-
